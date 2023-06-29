@@ -1,6 +1,8 @@
 package com.example.cfdemo.controller;
 
 import com.example.cfdemo.pojo.Checkout;
+import com.example.cfdemo.pojo.RentalAgreement;
+import com.example.cfdemo.service.ToolCheckout;
 import com.opengamma.strata.basics.ReferenceData;
 import com.opengamma.strata.basics.date.HolidayCalendar;
 import com.opengamma.strata.basics.date.HolidayCalendarId;
@@ -17,6 +19,12 @@ import java.time.LocalDate;
 @RestController
 public class MainController {
 
+    public ToolCheckout checkoutService;
+
+    public MainController(ToolCheckout checkoutService) {
+        this.checkoutService = checkoutService;
+    }
+
     @GetMapping(path = "/holiday", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<String> holiday() {
         HolidayCalendarId calendarId = HolidayCalendarId.of("USNY");
@@ -31,9 +39,12 @@ public class MainController {
      */
 
     @GetMapping(path = "/checkout", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<String> checkout(@RequestBody Checkout checkout) {
-        log.info("Checkout request for: {}", checkout);
+    public ResponseEntity<RentalAgreement> checkout(@RequestBody Checkout checkoutRequest) {
+        log.info("Checkout request for: {}", checkoutRequest);
 
-        return ResponseEntity.ok("Checkout");
+        RentalAgreement rentalAgreement = checkoutService.toolCheckout(checkoutRequest);
+        log.info("Rental agreement: {}", rentalAgreement);
+
+        return ResponseEntity.ok(rentalAgreement);
     }
 }
