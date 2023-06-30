@@ -28,19 +28,6 @@ public class MainController {
         this.checkoutService = checkoutService;
     }
 
-    @GetMapping(path = "/holiday", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<String> holiday() {
-        HolidayCalendarId calendarId = HolidayCalendarId.of("USNY");
-        HolidayCalendar holidayCalendar = calendarId.resolve(ReferenceData.standard());
-
-        boolean isHoliday = holidayCalendar.isHoliday(LocalDate.of(2023, 9, 4));
-        return ResponseEntity.ok(isHoliday ? "Holiday" : "Not Holiday");
-    }
-
-    /**
-     * Use java.time to get the first monday of the month for September (Labor Day)
-     */
-
     @GetMapping(path = "/checkout", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<RentalAgreement> checkout(@Valid @RequestBody Checkout checkoutRequest) {
         log.info("Checkout request for: {}", checkoutRequest);
