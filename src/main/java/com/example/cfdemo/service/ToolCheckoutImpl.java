@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
@@ -56,19 +57,17 @@ public class ToolCheckoutImpl implements ToolCheckout {
     }
 
     private BigDecimal generateFinalCharge(BigDecimal preDiscountAmount, BigDecimal discountAmount) {
-        return preDiscountAmount.subtract(discountAmount);
+        return preDiscountAmount.subtract(discountAmount).setScale(2, RoundingMode.HALF_UP);
     }
 
     private BigDecimal generateDiscountAmount(BigDecimal preDiscountAmount, Checkout checkoutRequest) {
-        // TODO: figure out rounding
         BigDecimal discountPercent = new BigDecimal(checkoutRequest.getDiscountPercent())
                 .multiply(new BigDecimal(".1")).multiply(new BigDecimal(".1"));
-        return preDiscountAmount.multiply(discountPercent);
+        return preDiscountAmount.multiply(discountPercent).setScale(2, RoundingMode.HALF_UP);
     }
 
     private BigDecimal generatePreDiscountCharge(Tool tool, int chargeDays) {
-        // TODO: figure out rounding (rounded half up two cents)
-        return tool.getDaily_charge().multiply(BigDecimal.valueOf(chargeDays));
+        return tool.getDaily_charge().multiply(BigDecimal.valueOf(chargeDays)).setScale(2, RoundingMode.HALF_UP);
     }
 
     private int generateChargeDays(Tool tool, Checkout checkoutRequest) {
