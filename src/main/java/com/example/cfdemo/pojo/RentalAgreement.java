@@ -1,14 +1,17 @@
 package com.example.cfdemo.pojo;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
+@Builder
 public class RentalAgreement {
     String toolCode;
-    Tool toolInfo;
+    String toolType;
+    String toolBrand;
     int rentalDays;
     LocalDate checkoutDate;
     LocalDate dueDate;
@@ -17,5 +20,5 @@ public class RentalAgreement {
     BigDecimal preDiscountCharge;
     long discountPercent;
     BigDecimal discountAmount;
-    BigDecimal finalCharge; // (preDiscountCharge - discountAmount)
+    BigDecimal finalCharge;
 }

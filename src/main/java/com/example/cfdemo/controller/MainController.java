@@ -47,7 +47,7 @@ public class MainController {
 
         RentalAgreement rentalAgreement = checkoutService.toolCheckout(checkoutRequest);
 
-        log.info("Rental agreement: {}", rentalAgreement);
+        log.info("{}", rentalAgreement);
 
         return ResponseEntity.ok(rentalAgreement);
     }

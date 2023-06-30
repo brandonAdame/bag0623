@@ -10,4 +10,7 @@ public class Tool {
     String tool_type;
     String brand;
     BigDecimal daily_charge;
+    boolean weekday_charge;
+    boolean weekend_charge;
+    boolean holiday_charge;
 }

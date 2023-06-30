@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Data
 public class Checkout {
 
-//    @NotBlank
+    @NotBlank
     String toolCode;
 
     @Min(1)
@@ -21,6 +21,6 @@ public class Checkout {
     @Max(100)
     int discountPercent;
 
-//    @NotNull
+    @NotNull
     LocalDate checkoutDate;
 }
