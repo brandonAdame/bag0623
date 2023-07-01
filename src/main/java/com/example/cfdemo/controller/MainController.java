@@ -4,9 +4,6 @@ import com.example.cfdemo.pojo.Checkout;
 import com.example.cfdemo.pojo.ErrorResponse;
 import com.example.cfdemo.pojo.RentalAgreement;
 import com.example.cfdemo.service.ToolCheckout;
-import com.opengamma.strata.basics.ReferenceData;
-import com.opengamma.strata.basics.date.HolidayCalendar;
-import com.opengamma.strata.basics.date.HolidayCalendarId;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Slf4j

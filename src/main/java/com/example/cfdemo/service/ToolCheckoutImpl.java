@@ -1,6 +1,6 @@
 package com.example.cfdemo.service;
 
-import com.example.cfdemo.dao.ToolRetrieval;
+import com.example.cfdemo.dao.ToolRetrievalDao;
 import com.example.cfdemo.pojo.Checkout;
 import com.example.cfdemo.pojo.RentalAgreement;
 import com.example.cfdemo.pojo.Tool;
@@ -20,15 +20,15 @@ import static java.time.temporal.TemporalAdjusters.firstInMonth;
 @Service
 public class ToolCheckoutImpl implements ToolCheckout {
 
-    ToolRetrieval toolRetrieval;
+    ToolRetrievalDao toolRetrievalDao;
 
-    public ToolCheckoutImpl(ToolRetrieval toolRetrieval) {
-        this.toolRetrieval = toolRetrieval;
+    public ToolCheckoutImpl(ToolRetrievalDao toolRetrievalDao) {
+        this.toolRetrievalDao = toolRetrievalDao;
     }
 
     @Override
     public RentalAgreement toolCheckout(Checkout checkoutRequest) {
-        Tool tool = toolRetrieval.checkoutTool(checkoutRequest);
+        Tool tool = toolRetrievalDao.checkoutTool(checkoutRequest);
 
         log.info("{}", tool);
         return generateRentalAgreement(tool, checkoutRequest);
