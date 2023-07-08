@@ -109,7 +109,7 @@ public class ToolCheckoutImpl implements ToolCheckout {
      */
     private int generateChargeDays(Tool tool, Checkout checkoutRequest) {
         int chargeDays = 0;
-        for (int i = 1; i <= checkoutRequest.getRentalDayCount(); i++) {
+        for (int i = 0; i < checkoutRequest.getRentalDayCount(); i++) {
             LocalDate currDate = checkoutRequest.getCheckoutDate().plusDays(i);
             log.debug("Checking date: {}", currDate);
 
@@ -132,7 +132,9 @@ public class ToolCheckoutImpl implements ToolCheckout {
             return true;
         } else if (tool.isWeekend_charge() && isWeekend(date)) {
             return true;
-        } else return tool.isHoliday_charge() && isHoliday(date);
+        } else {
+            return tool.isHoliday_charge() && isHoliday(date);
+        }
     }
 
     /**
@@ -157,5 +159,4 @@ public class ToolCheckoutImpl implements ToolCheckout {
             return true;
         } else return (date.getMonth() == Month.JULY) && (date.getDayOfMonth() == 4);
     }
-
 }

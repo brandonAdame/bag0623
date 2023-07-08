@@ -30,7 +30,7 @@ public class MainController {
 
         RentalAgreement rentalAgreement = checkoutService.toolCheckout(checkoutRequest);
 
-        log.info("{}", rentalAgreement);
+        log.info("Rental agreement: {}", rentalAgreement);
 
         return ResponseEntity.ok(rentalAgreement);
     }
@@ -52,6 +52,6 @@ public class MainController {
         StringBuilder sb = new StringBuilder();
         sb.append(field).append(": ").append(errorMsg);
 
-        return ResponseEntity.ok(ErrorResponse.builder().response(sb.toString()).build());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse.builder().response(sb.toString()).build());
     }
 }
