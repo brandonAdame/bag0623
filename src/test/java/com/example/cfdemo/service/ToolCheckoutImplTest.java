@@ -268,13 +268,4 @@ public class ToolCheckoutImplTest {
         RentalAgreement actualAgreement = toolCheckout.toolCheckout(request);
         assertEquals(expectedAgreement, actualAgreement);
     }
-
-    @Test
-    void testCurrency() {
-        BigDecimal fc = new BigDecimal("1.99");
-        NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
-        String money = nf.format(fc);
-
-        System.out.println(money);
-    }
 }
