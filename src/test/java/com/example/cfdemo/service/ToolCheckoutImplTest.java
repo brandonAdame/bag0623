@@ -25,6 +25,7 @@ public class ToolCheckoutImplTest {
     private ToolRetrievalDao toolRetrievalDao;
 
     private Tool chainsaw;
+    private Tool ladder;
 
     @BeforeEach
     void setUp() {
@@ -57,7 +58,7 @@ public class ToolCheckoutImplTest {
         jackhammerDewalt.setWeekend_charge(false);
         jackhammerDewalt.setHoliday_charge(false);
 
-        Tool ladder = new Tool();
+        ladder = new Tool();
         ladder.setTool_code("LADW");
         ladder.setTool_type("Ladder");
         ladder.setBrand("Werner");
@@ -65,38 +66,6 @@ public class ToolCheckoutImplTest {
         ladder.setWeekday_charge(true);
         ladder.setWeekend_charge(true);
         ladder.setHoliday_charge(false);
-    }
-
-    //    @Test
-    void testCheckoutJackhammer_Rigid() {
-        // Given
-        Checkout request = new Checkout();
-        request.setToolCode("JAKR");
-        request.setRentalDayCount(5);
-        request.setDiscountPercent(101);
-        request.setCheckoutDate(LocalDate.of(2015, 9, 3));
-
-        RentalAgreement expectedAgreement = RentalAgreement.builder()
-                .toolCode(chainsaw.getTool_code())
-                .toolType(chainsaw.getTool_type())
-                .toolBrand(chainsaw.getBrand())
-                .rentalDays(request.getRentalDayCount())
-                .checkoutDate(request.getCheckoutDate())
-                .dueDate(LocalDate.of(2023, 7, 6))
-                .dailyRentalCharge(chainsaw.getDaily_charge())
-                .chargeDays(6)
-                .preDiscountCharge(new BigDecimal("8.94"))
-                .discountPercent(request.getDiscountPercent())
-                .discountAmount(new BigDecimal("3.58"))
-                .finalCharge(new BigDecimal("5.36"))
-                .build();
-
-        // When
-        when(toolRetrievalDao.checkoutTool(request)).thenReturn(chainsaw);
-
-        // Then
-        RentalAgreement actualAgreement = toolCheckout.toolCheckout(request);
-        assertEquals(expectedAgreement, actualAgreement);
     }
 
     @Test
@@ -221,6 +190,70 @@ public class ToolCheckoutImplTest {
 
         // When
         when(toolRetrievalDao.checkoutTool(request)).thenReturn(chainsaw);
+
+        // Then
+        RentalAgreement actualAgreement = toolCheckout.toolCheckout(request);
+        assertEquals(expectedAgreement, actualAgreement);
+    }
+
+    @Test
+    void testCheckoutLadder_OnWeekday() {
+        // Given
+        Checkout request = new Checkout();
+        request.setToolCode("LADW");
+        request.setRentalDayCount(1);
+        request.setDiscountPercent(0);
+        request.setCheckoutDate(LocalDate.of(2023, 7, 7));
+
+        RentalAgreement expectedAgreement = RentalAgreement.builder()
+                .toolCode(ladder.getTool_code())
+                .toolType(ladder.getTool_type())
+                .toolBrand(ladder.getBrand())
+                .rentalDays(request.getRentalDayCount())
+                .checkoutDate(request.getCheckoutDate())
+                .dueDate(LocalDate.of(2023, 7, 8))
+                .dailyRentalCharge(ladder.getDaily_charge())
+                .chargeDays(1)
+                .preDiscountCharge(new BigDecimal("1.99"))
+                .discountPercent(request.getDiscountPercent())
+                .discountAmount(new BigDecimal("0.00"))
+                .finalCharge(new BigDecimal("1.99"))
+                .build();
+
+        // When
+        when(toolRetrievalDao.checkoutTool(request)).thenReturn(ladder);
+
+        // Then
+        RentalAgreement actualAgreement = toolCheckout.toolCheckout(request);
+        assertEquals(expectedAgreement, actualAgreement);
+    }
+
+    @Test
+    void testCheckoutLadder_OnWeekend() {
+        // Given
+        Checkout request = new Checkout();
+        request.setToolCode("LADW");
+        request.setRentalDayCount(1);
+        request.setDiscountPercent(0);
+        request.setCheckoutDate(LocalDate.of(2023, 7, 8));
+
+        RentalAgreement expectedAgreement = RentalAgreement.builder()
+                .toolCode(ladder.getTool_code())
+                .toolType(ladder.getTool_type())
+                .toolBrand(ladder.getBrand())
+                .rentalDays(request.getRentalDayCount())
+                .checkoutDate(request.getCheckoutDate())
+                .dueDate(LocalDate.of(2023, 7, 9))
+                .dailyRentalCharge(ladder.getDaily_charge())
+                .chargeDays(1)
+                .preDiscountCharge(new BigDecimal("1.99"))
+                .discountPercent(request.getDiscountPercent())
+                .discountAmount(new BigDecimal("0.00"))
+                .finalCharge(new BigDecimal("1.99"))
+                .build();
+
+        // When
+        when(toolRetrievalDao.checkoutTool(request)).thenReturn(ladder);
 
         // Then
         RentalAgreement actualAgreement = toolCheckout.toolCheckout(request);

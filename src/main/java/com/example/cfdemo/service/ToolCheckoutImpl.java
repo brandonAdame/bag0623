@@ -121,20 +121,16 @@ public class ToolCheckoutImpl implements ToolCheckout {
     }
 
     /**
-     * Checks if tool on a date is chargeable
+     * Checks if tool on a <code>date</code> is chargeable
      *
      * @param tool Tool
      * @param date Date
      * @return True if date is chargeable; false otherwise
      */
     private boolean isChargeableDay(Tool tool, LocalDate date) {
-        if (tool.isWeekday_charge() && !isWeekend(date)) {
-            return true;
-        } else if (tool.isWeekend_charge() && isWeekend(date)) {
-            return true;
-        } else {
-            return tool.isHoliday_charge() && isHoliday(date);
-        }
+        return (tool.isWeekday_charge() && !isWeekend(date))
+                || (tool.isWeekend_charge() && isWeekend(date))
+                || (tool.isHoliday_charge() && isHoliday(date));
     }
 
     /**
