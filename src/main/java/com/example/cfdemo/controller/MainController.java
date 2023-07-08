@@ -52,6 +52,7 @@ public class MainController {
         StringBuilder sb = new StringBuilder();
         sb.append(field).append(": ").append(errorMsg);
 
+        log.error("Rental Checkout Error - {}", sb);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse.builder().response(sb.toString()).build());
     }
 }

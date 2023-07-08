@@ -78,7 +78,7 @@ public class MainControllerTest {
     }
 
     @Test
-    void checkoutJackhammer_BadRequest() throws Exception {
+    void checkoutJackhammer_BadRequest_DiscountPercent() throws Exception {
         // Given
         Checkout request = new Checkout();
         request.setToolCode("JAKR");
@@ -267,6 +267,24 @@ public class MainControllerTest {
                         .content(asJsonString(request)))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void checkoutJackhammer_BadRequest_RentalDayCount() throws Exception {
+        // Given
+        Checkout request = new Checkout();
+        request.setToolCode("JAKR");
+        request.setRentalDayCount(0);
+        request.setDiscountPercent(0); // percent must be 0 - 100
+        request.setCheckoutDate(LocalDate.of(2015, 9, 3));
+
+        // When
+        mockMvc.perform(MockMvcRequestBuilders.get("/checkout")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(request)))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.response").value("rentalDayCount: must be greater than or equal to 1"));
     }
 
     public static String asJsonString(final Object obj) {
