@@ -17,7 +17,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -37,6 +40,12 @@ public class MainControllerTest {
     private Tool ladder;
 
     private Tool chainsaw;
+
+    @MockBean
+    private NumberFormat numberFormat;
+
+    @MockBean
+    private DateTimeFormatter dateTimeFormatter;
 
     @BeforeEach
     void setup() {
@@ -108,14 +117,14 @@ public class MainControllerTest {
                 .toolType(ladder.getTool_type())
                 .toolBrand(ladder.getBrand())
                 .rentalDays(request.getRentalDayCount())
-                .checkoutDate(request.getCheckoutDate())
-                .dueDate(LocalDate.of(2020, 7, 5))
-                .dailyRentalCharge(ladder.getDaily_charge())
+                .checkoutDate(request.getCheckoutDate().format(dateTimeFormatter))
+                .dueDate(LocalDate.of(2020, 7, 5).format(dateTimeFormatter))
+                .dailyRentalCharge(numberFormat.format(ladder.getDaily_charge()))
                 .chargeDays(3)
-                .preDiscountCharge(new BigDecimal("5.97"))
+                .preDiscountCharge(numberFormat.format(new BigDecimal("5.97")))
                 .discountPercent(request.getDiscountPercent())
-                .discountAmount(new BigDecimal(".597"))
-                .finalCharge(new BigDecimal("5.37"))
+                .discountAmount(numberFormat.format(new BigDecimal(".597")))
+                .finalCharge(numberFormat.format(new BigDecimal(".597")))
                 .build();
 
         // When
@@ -143,14 +152,14 @@ public class MainControllerTest {
                 .toolType(chainsaw.getTool_type())
                 .toolBrand(chainsaw.getBrand())
                 .rentalDays(request.getRentalDayCount())
-                .checkoutDate(request.getCheckoutDate())
-                .dueDate(LocalDate.of(2015, 7, 7))
-                .dailyRentalCharge(chainsaw.getDaily_charge())
+                .checkoutDate(request.getCheckoutDate().format(dateTimeFormatter))
+                .dueDate(LocalDate.of(2015, 7, 7).format(dateTimeFormatter))
+                .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(3)
-                .preDiscountCharge(new BigDecimal("4.47"))
+                .preDiscountCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .discountPercent(request.getDiscountPercent())
-                .discountAmount(new BigDecimal("1.12"))
-                .finalCharge(new BigDecimal("3.35"))
+                .discountAmount(numberFormat.format(new BigDecimal("1.12")))
+                .finalCharge(numberFormat.format(new BigDecimal("3.35")))
                 .build();
 
         // When
@@ -178,14 +187,14 @@ public class MainControllerTest {
                 .toolType(chainsaw.getTool_type())
                 .toolBrand(chainsaw.getBrand())
                 .rentalDays(request.getRentalDayCount())
-                .checkoutDate(request.getCheckoutDate())
-                .dueDate(LocalDate.of(2015, 9, 9))
-                .dailyRentalCharge(chainsaw.getDaily_charge())
+                .checkoutDate(request.getCheckoutDate().format(dateTimeFormatter))
+                .dueDate(LocalDate.of(2015, 9, 9).format(dateTimeFormatter))
+                .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(4)
-                .preDiscountCharge(new BigDecimal("11.96"))
+                .preDiscountCharge(numberFormat.format(new BigDecimal("11.96")))
                 .discountPercent(request.getDiscountPercent())
-                .discountAmount(new BigDecimal("0.00"))
-                .finalCharge(new BigDecimal("11.96"))
+                .discountAmount(numberFormat.format(new BigDecimal("0.00")))
+                .finalCharge(numberFormat.format(new BigDecimal("11.96")))
                 .build();
 
         // When
@@ -213,14 +222,14 @@ public class MainControllerTest {
                 .toolType(chainsaw.getTool_type())
                 .toolBrand(chainsaw.getBrand())
                 .rentalDays(request.getRentalDayCount())
-                .checkoutDate(request.getCheckoutDate())
-                .dueDate(LocalDate.of(2015, 7, 11))
-                .dailyRentalCharge(chainsaw.getDaily_charge())
+                .checkoutDate(request.getCheckoutDate().format(dateTimeFormatter))
+                .dueDate(LocalDate.of(2015, 7, 11).format(dateTimeFormatter))
+                .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(6)
-                .preDiscountCharge(new BigDecimal("17.94"))
+                .preDiscountCharge(numberFormat.format(new BigDecimal("17.94")))
                 .discountPercent(request.getDiscountPercent())
-                .discountAmount(new BigDecimal("0.00"))
-                .finalCharge(new BigDecimal("17.94"))
+                .discountAmount(numberFormat.format(new BigDecimal("0.00")))
+                .finalCharge(numberFormat.format(new BigDecimal("17.94")))
                 .build();
 
         // When
@@ -248,14 +257,14 @@ public class MainControllerTest {
                 .toolType(chainsaw.getTool_type())
                 .toolBrand(chainsaw.getBrand())
                 .rentalDays(request.getRentalDayCount())
-                .checkoutDate(request.getCheckoutDate())
-                .dueDate(LocalDate.of(2020, 7, 6))
-                .dailyRentalCharge(chainsaw.getDaily_charge())
+                .checkoutDate(request.getCheckoutDate().format(dateTimeFormatter))
+                .dueDate(LocalDate.of(2020, 7, 6).format(dateTimeFormatter))
+                .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(2)
-                .preDiscountCharge(new BigDecimal("5.98"))
+                .preDiscountCharge(numberFormat.format(new BigDecimal("5.98")))
                 .discountPercent(request.getDiscountPercent())
-                .discountAmount(new BigDecimal("2.99"))
-                .finalCharge(new BigDecimal("2.99"))
+                .discountAmount(numberFormat.format(new BigDecimal("2.99")))
+                .finalCharge(numberFormat.format(new BigDecimal("2.99")))
                 .build();
 
         // When

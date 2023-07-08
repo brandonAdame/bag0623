@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 
 import static java.time.temporal.TemporalAdjusters.firstInMonth;
@@ -21,9 +23,13 @@ import static java.time.temporal.TemporalAdjusters.firstInMonth;
 public class ToolCheckoutImpl implements ToolCheckout {
 
     ToolRetrievalDao toolRetrievalDao;
+    NumberFormat numberFormat;
+    DateTimeFormatter dateTimeFormatter;
 
-    public ToolCheckoutImpl(ToolRetrievalDao toolRetrievalDao) {
+    public ToolCheckoutImpl(ToolRetrievalDao toolRetrievalDao, NumberFormat numberFormat, DateTimeFormatter dateTimeFormatter) {
         this.toolRetrievalDao = toolRetrievalDao;
+        this.numberFormat = numberFormat;
+        this.dateTimeFormatter = dateTimeFormatter;
     }
 
     @Override
@@ -52,14 +58,14 @@ public class ToolCheckoutImpl implements ToolCheckout {
                 .toolType(tool.getTool_type())
                 .toolBrand(tool.getBrand())
                 .rentalDays(checkoutRequest.getRentalDayCount())
-                .checkoutDate(checkoutRequest.getCheckoutDate())
-                .dueDate(checkoutRequest.getCheckoutDate().plusDays(checkoutRequest.getRentalDayCount()))
-                .dailyRentalCharge(tool.getDaily_charge())
+                .checkoutDate(checkoutRequest.getCheckoutDate().format(dateTimeFormatter))
+                .dueDate(checkoutRequest.getCheckoutDate().plusDays(checkoutRequest.getRentalDayCount()).format(dateTimeFormatter))
+                .dailyRentalCharge(numberFormat.format(tool.getDaily_charge()))
                 .chargeDays(chargeDays)
-                .preDiscountCharge(preDiscount)
+                .preDiscountCharge(numberFormat.format(preDiscount))
                 .discountPercent(checkoutRequest.getDiscountPercent())
-                .discountAmount(discountAmount)
-                .finalCharge(finalCharge)
+                .discountAmount(numberFormat.format(discountAmount))
+                .finalCharge(numberFormat.format(finalCharge))
                 .build();
     }
 
