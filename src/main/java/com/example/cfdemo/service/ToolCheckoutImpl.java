@@ -63,7 +63,7 @@ public class ToolCheckoutImpl implements ToolCheckout {
                 .dailyRentalCharge(numberFormat.format(tool.getDaily_charge()))
                 .chargeDays(chargeDays)
                 .preDiscountCharge(numberFormat.format(preDiscount))
-                .discountPercent(checkoutRequest.getDiscountPercent())
+                .discountPercent(checkoutRequest.getDiscountPercent() + "%")
                 .discountAmount(numberFormat.format(discountAmount))
                 .finalCharge(numberFormat.format(finalCharge))
                 .build();
@@ -81,7 +81,7 @@ public class ToolCheckoutImpl implements ToolCheckout {
     }
 
     /**
-     * Generate discount percentage
+     * Generate discount amount
      *
      * @param preDiscountAmount Chargeable amount prior to discount
      * @param checkoutRequest   Tool checkout request

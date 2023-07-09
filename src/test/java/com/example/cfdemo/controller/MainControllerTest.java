@@ -121,7 +121,7 @@ public class MainControllerTest {
                 .dailyRentalCharge(numberFormat.format(ladder.getDaily_charge()))
                 .chargeDays(3)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("5.97")))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("10%")
                 .discountAmount(numberFormat.format(new BigDecimal(".597")))
                 .finalCharge(numberFormat.format(new BigDecimal(".597")))
                 .build();
@@ -156,7 +156,7 @@ public class MainControllerTest {
                 .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(3)
                 .preDiscountCharge(numberFormat.format(chainsaw.getDaily_charge()))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("25%")
                 .discountAmount(numberFormat.format(new BigDecimal("1.12")))
                 .finalCharge(numberFormat.format(new BigDecimal("3.35")))
                 .build();
@@ -191,7 +191,7 @@ public class MainControllerTest {
                 .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(4)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("11.96")))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("0%")
                 .discountAmount(numberFormat.format(new BigDecimal("0.00")))
                 .finalCharge(numberFormat.format(new BigDecimal("11.96")))
                 .build();
@@ -226,7 +226,7 @@ public class MainControllerTest {
                 .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(6)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("17.94")))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("0%")
                 .discountAmount(numberFormat.format(new BigDecimal("0.00")))
                 .finalCharge(numberFormat.format(new BigDecimal("17.94")))
                 .build();
@@ -261,7 +261,7 @@ public class MainControllerTest {
                 .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(2)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("5.98")))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("50%")
                 .discountAmount(numberFormat.format(new BigDecimal("2.99")))
                 .finalCharge(numberFormat.format(new BigDecimal("2.99")))
                 .build();

@@ -15,7 +15,7 @@ public class RentalAgreement {
     String dailyRentalCharge;
     int chargeDays;
     String preDiscountCharge;
-    long discountPercent;
+    String discountPercent;
     String discountAmount;
     String finalCharge;
 
@@ -32,7 +32,7 @@ public class RentalAgreement {
                 .append("Daily rental charge: ").append(this.dailyRentalCharge).append("\n")
                 .append("Charge days: ").append(this.chargeDays).append("\n")
                 .append("Pre-discount charge: ").append(this.preDiscountCharge).append("\n")
-                .append("Discount percent: ").append(this.discountPercent).append("%").append("\n")
+                .append("Discount percent: ").append(this.discountPercent).append("\n")
                 .append("Discount amount: ").append(this.discountAmount).append("\n")
                 .append("Final charge: ").append(this.finalCharge);
 

@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -30,6 +29,7 @@ public class ToolCheckoutImplTest {
 
     @Mock
     private NumberFormat numberFormat;
+
     @Mock
     private DateTimeFormatter dateTimeFormatter;
 
@@ -96,7 +96,7 @@ public class ToolCheckoutImplTest {
                 .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(6)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("8.94")))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("40%")
                 .discountAmount(numberFormat.format(new BigDecimal("3.58")))
                 .finalCharge(numberFormat.format(new BigDecimal("5.36")))
                 .build();
@@ -128,7 +128,7 @@ public class ToolCheckoutImplTest {
                 .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(1)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("1.49")))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("0%")
                 .discountAmount(numberFormat.format(new BigDecimal("0.00")))
                 .finalCharge(numberFormat.format(new BigDecimal("1.49")))
                 .build();
@@ -160,7 +160,7 @@ public class ToolCheckoutImplTest {
                 .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(1)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("1.49")))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("0%")
                 .discountAmount(numberFormat.format(new BigDecimal("0.00")))
                 .finalCharge(numberFormat.format(new BigDecimal("1.49")))
                 .build();
@@ -192,7 +192,7 @@ public class ToolCheckoutImplTest {
                 .dailyRentalCharge(numberFormat.format(chainsaw.getDaily_charge()))
                 .chargeDays(1)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("1.49")))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("0%")
                 .discountAmount(numberFormat.format(new BigDecimal("0.00")))
                 .finalCharge(numberFormat.format(new BigDecimal("1.49")))
                 .build();
@@ -224,7 +224,7 @@ public class ToolCheckoutImplTest {
                 .dailyRentalCharge(numberFormat.format(ladder.getDaily_charge()))
                 .chargeDays(1)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("1.99")))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("0%")
                 .discountAmount(numberFormat.format(new BigDecimal("0.00")))
                 .finalCharge(numberFormat.format(new BigDecimal("1.99")))
                 .build();
@@ -256,7 +256,7 @@ public class ToolCheckoutImplTest {
                 .dailyRentalCharge(numberFormat.format(ladder.getDaily_charge()))
                 .chargeDays(1)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("1.99")))
-                .discountPercent(request.getDiscountPercent())
+                .discountPercent("0%")
                 .discountAmount(numberFormat.format(new BigDecimal("0.00")))
                 .finalCharge(numberFormat.format(new BigDecimal("1.99")))
                 .build();
