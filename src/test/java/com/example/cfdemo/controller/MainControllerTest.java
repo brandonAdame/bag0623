@@ -122,8 +122,8 @@ public class MainControllerTest {
                 .chargeDays(3)
                 .preDiscountCharge(numberFormat.format(new BigDecimal("5.97")))
                 .discountPercent("10%")
-                .discountAmount(numberFormat.format(new BigDecimal(".597")))
-                .finalCharge(numberFormat.format(new BigDecimal(".597")))
+                .discountAmount(numberFormat.format(new BigDecimal("0.60")))
+                .finalCharge(numberFormat.format(new BigDecimal("5.37")))
                 .build();
 
         // When
